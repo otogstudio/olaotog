@@ -249,6 +249,13 @@ img {
   align-items: flex-start;
 }
 
+.background-video {
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+  display: flex;
+}
+
 @media screen and (max-width: 991px) {
   .designworksnav {
     margin-right: 25px;
@@ -266,6 +273,7 @@ img {
   .home-left-content-wrap {
     width: 100%;
     min-width: 100%;
+    padding-bottom: 0;
   }
 
   .site-container {
@@ -301,7 +309,7 @@ img {
 
   .tabs-content {
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 0;
     overflow: visible;
   }
 
@@ -342,6 +350,13 @@ img {
 
   .sub-tab-content {
     overflow: visible;
+  }
+
+  .background-video {
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 10px;
+    display: flex;
   }
 }
 
