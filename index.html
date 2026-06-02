@@ -776,7 +776,7 @@
 <section class="site-container">
 
   <!-- ── Logo / icon ──────────────────────────────────────────── -->
-  <div class="icon-wrap">
+  <div class="icon-wrap" id="logo-wrap" style="cursor:pointer;">
     <img src="images/ola-otog-icon.svg" loading="lazy" alt="Ola Otog" class="ola-otog-icon">
   </div>
 
@@ -1465,6 +1465,14 @@
 
   // initial load
   route(window.location.hash || '#' + DEFAULT_HASH);
+
+  // logo click — scroll active content column to top
+  document.getElementById('logo-wrap').addEventListener('click', function() {
+    var activePage = document.querySelector('.page.active');
+    if (!activePage) return;
+    var scroller = activePage.querySelector('.sub-tab-content, .home-navbar-container');
+    if (scroller) scroller.scrollTop = 0;
+  });
 </script>
 
 </body>
