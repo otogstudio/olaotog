@@ -1393,6 +1393,9 @@
 
   var DEFAULT_HASH = 'info';
 
+  // remember last visited sub-page per section
+  var lastSub = {};
+
   function route(hash) {
     if (!hash || hash === '#') hash = DEFAULT_HASH;
     hash = hash.replace(/^#/, '');
@@ -1422,18 +1425,22 @@
     var navLink = document.querySelector('.nav-link-button[data-page="' + pageId + '"]');
     if (navLink) navLink.classList.add('active');
 
-    // handle sub-pages — only show one if explicitly in the URL
+    // handle sub-pages
     var allSubPages = pageEl.querySelectorAll('.sub-page');
     var allSubLinks = pageEl.querySelectorAll('.sub-nav-link');
 
     allSubPages.forEach(function(el) { el.classList.remove('active'); });
     allSubLinks.forEach(function(el) { el.classList.remove('active'); });
 
-    if (subId) {
-      var subEl   = document.getElementById('sub-' + pageId + '-' + subId);
-      var subLink = pageEl.querySelector('.sub-nav-link[data-sub="' + subId + '"]');
+    // use explicit subId, or fall back to last visited for this section
+    var targetSub = subId || lastSub[pageId] || null;
+
+    if (targetSub) {
+      var subEl   = document.getElementById('sub-' + pageId + '-' + targetSub);
+      var subLink = pageEl.querySelector('.sub-nav-link[data-sub="' + targetSub + '"]');
       if (subEl)   subEl.classList.add('active');
       if (subLink) subLink.classList.add('active');
+      lastSub[pageId] = targetSub; // save it
     }
 
     // reset scroll on content column
