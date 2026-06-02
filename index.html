@@ -563,7 +563,7 @@
       display: flex;
       flex-flow: row;
       gap: 5px;
-      justify-content: flex-end;
+      justify-content: flex-start;
       align-items: flex-start;
       flex: 1;
       min-width: 0;
@@ -583,14 +583,23 @@
     
     .home-right-content-wrap {
       display: grid;
-      grid-template-columns: 1fr 0.6fr;
+      grid-template-columns: 30% 70%;
       gap: 5px;
       position: relative;
+      flex: 1;
+      min-width: 0;
       align-items: start;
+    }
+
+    .home-right-content-wrap .project-thumbnail img {
+      width: 100%;
+      height: auto;
     }
     
     .home-right-content-wrap.sticky {
-      position: static;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
     }
     
     /* ── Cards ────────────────────────────────────────────────────── */
@@ -1384,15 +1393,8 @@
 
   var DEFAULT_HASH = 'info';
 
-  var PAGE_DEFAULTS = {
-    'design-work':  'offbeat',
-    'art-practice': 'garden',
-    'field-notes':  'rdi'
-  };
-
   function route(hash) {
     if (!hash || hash === '#') hash = DEFAULT_HASH;
-    // strip leading #
     hash = hash.replace(/^#/, '');
 
     var parts  = hash.split('/');
@@ -1420,25 +1422,23 @@
     var navLink = document.querySelector('.nav-link-button[data-page="' + pageId + '"]');
     if (navLink) navLink.classList.add('active');
 
-    // handle sub-pages
+    // handle sub-pages — only show one if explicitly in the URL
     var allSubPages = pageEl.querySelectorAll('.sub-page');
     var allSubLinks = pageEl.querySelectorAll('.sub-nav-link');
 
-    if (allSubPages.length) {
-      // hide all sub-pages
-      allSubPages.forEach(function(el) { el.classList.remove('active'); });
-      allSubLinks.forEach(function(el) { el.classList.remove('active'); });
+    allSubPages.forEach(function(el) { el.classList.remove('active'); });
+    allSubLinks.forEach(function(el) { el.classList.remove('active'); });
 
-      var targetSub = subId || PAGE_DEFAULTS[pageId];
-      var subEl   = document.getElementById('sub-' + pageId + '-' + targetSub);
-      var subLink = pageEl.querySelector('.sub-nav-link[data-sub="' + targetSub + '"]');
-
+    if (subId) {
+      var subEl   = document.getElementById('sub-' + pageId + '-' + subId);
+      var subLink = pageEl.querySelector('.sub-nav-link[data-sub="' + subId + '"]');
       if (subEl)   subEl.classList.add('active');
       if (subLink) subLink.classList.add('active');
     }
 
-    // scroll to top on page change
-    window.scrollTo(0, 0);
+    // reset scroll on content column
+    var content = pageEl.querySelector('.sub-tab-content, .home-navbar-container');
+    if (content) content.scrollTop = 0;
   }
 
   // intercept all internal nav clicks to avoid page reload
