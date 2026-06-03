@@ -402,6 +402,7 @@
       font-family: Syne Mono, sans-serif;
       font-size: 13px;
       line-height: 18px;
+      text-wrap: pretty;
     }
     
     .h3.index  { opacity: .5; }
@@ -445,7 +446,7 @@
       align-items: flex-start;
       margin-right: 25px;
       padding: 10px 0 0;
-      /* fixed column — no scrolling */
+      /* fixed column, no scrolling */
       flex-shrink: 0;
       align-self: flex-start;
     }
@@ -506,6 +507,12 @@
       min-width: 0;
       height: 100%;
       overflow: hidden;
+      animation: pageFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes pageFadeIn {
+      from { filter: blur(4px); opacity: 0.3; }
+      to   { filter: blur(0px); opacity: 1; }
     }
     
     /* tabs-content: fixed sub-nav column + scrolling content column */
@@ -530,7 +537,10 @@
     }
     
     .sub-page         { display: none; }
-    .sub-page.active  { display: block; }
+    .sub-page.active  {
+      display: block;
+      animation: pageFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     
     /* ── Project split layout ─────────────────────────────────────── */
     
@@ -662,6 +672,19 @@
       padding: 5px;
     }
     
+    /* ── Gathering intro card ────────────────────────────────────── */
+
+    .gathering-intro {
+      background-color: #fdf5e6;
+      padding: 8px 10px 50px;
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    .gathering-intro .h3 {
+      font-style: italic;
+    }
+
     /* ── Video wrapper ────────────────────────────────────────────── */
     
     .video-wrap {
@@ -779,10 +802,40 @@
         max-width: 100%;
       }
     }
+
+    /* ── Loader ───────────────────────────────────────────────────── */
+
+    #page-loader {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-family: Syne Mono, sans-serif;
+      font-size: 13px;
+      color: #000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 9999;
+    }
+
+    #page-loader.visible {
+      opacity: 1;
+    }
+
+    #page-loader span {
+      display: inline-block;
+      animation: loaderDot 1s infinite;
+    }
+
+    @keyframes loaderDot {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
   </style>
 </head>
 
 <body class="body">
+<div id="page-loader"><span>...</span></div>
 <section class="site-container">
 
   <!-- ── Logo / icon ──────────────────────────────────────────── -->
@@ -796,6 +849,7 @@
       <a href="#info"        class="nav-link-button" data-page="info"><div>OLA OTOG</div></a>
       <a href="#design-work" class="nav-link-button" data-page="design-work"><div>DESIGN WORK</div></a>
       <a href="#art-practice" class="nav-link-button" data-page="art-practice"><div>ART PRACTICE</div></a>
+      <a href="#food-practice" class="nav-link-button" data-page="food-practice"><div>FOOD PRACTICE</div></a>
       <a href="#field-notes"  class="nav-link-button" data-page="field-notes"><div>FIELD NOTES</div></a>
       <a href="#contact"      class="nav-link-button" data-page="contact"><div>CONTACT</div></a>
     </div>
@@ -823,8 +877,8 @@
           <div class="h3">PARTICIPATIONS</div>
           <div class="participations-wrap">
             <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Offbeat Folk Film Festival, Craft Exhibition, Staffordshire St, London, UK</div></div></div>
-            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Offbeat x Parlour Restaurant, Supper Club — curator, London, UK</div></div></div>
-            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Series of Gatherings Around Food — curator, East London, UK</div></div></div>
+            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Offbeat x Parlour Restaurant, Supper Club, curator, London, UK</div></div></div>
+            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Series of Gatherings Around Food, curator, East London, UK</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Fellow of the Higher Education Academy – in progress</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2025</div></div><div class="entry-info"><div class="h3">Materials &amp; Technologies residency, Cornwall, UK</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2025</div></div><div class="entry-info"><div class="h3">Traditional &amp; Contemporary Textiles Exhibition, The Higgins Museum, Bedford, UK</div></div></div>
@@ -907,11 +961,11 @@
 
       <div class="home-right-content-wrap sticky">
         <div class="project-thumbnail">
-          <img sizes="100vw" srcset="images/ola-otog-website-01-p-500.webp 500w, images/ola-otog-website-01.webp 720w" alt="" src="images/ola-otog-website-01.png" loading="lazy">
+          <img sizes="100vw" srcset="images/ola-otog-website-01-p-500.webp 500w, images/ola-otog-website-01.webp 720w" alt="" src="images/ola-otog-website-01.webp" loading="lazy">
           <div class="photo-index-text"><div class="h3">( Self-portrait as a mermaid, drawn in childhood. )</div></div>
         </div>
         <div class="project-thumbnail">
-          <img sizes="100vw" srcset="images/ola-otog-photo-1-2-p-500.webp 500w, images/ola-otog-photo-1-2.webp 720w" alt="" src="images/ola-otog-photo-1-2.png" loading="lazy">
+          <img sizes="100vw" srcset="images/ola-otog-photo-1-2-p-500.webp 500w, images/ola-otog-photo-1-2.webp 720w" alt="" src="images/ola-otog-photo-1-2.webp" loading="lazy">
           <div class="photo-index-text"><div class="h3">( Self-portrait now. )</div></div>
         </div>
       </div>
@@ -954,14 +1008,14 @@
               </video>
               <div class="h3 index video-caption">Animation by Jack Pell</div>
             </div>
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/1_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/1_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/1_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/1_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/2_Ola_Otog_Offbeat_Identity.webp 720w" alt="" src="images/2_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/3_Ola_Otog_Offbeat_Identity.webp 650w" alt="" src="images/3_Ola_Otog_Offbeat_Identity.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/4_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/4_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/4_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/4_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/4_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/5_Ola_Otog_Offbeat_Identity.webp 650w" alt="" src="images/5_Ola_Otog_Offbeat_Identity.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/6_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/6_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/6_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/6_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/6_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/7_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/7_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/7_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/7_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/7_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/8_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/8_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/8_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/8_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/8_Ola_Otog_Offbeat_Identity-p-2000.webp 2000w, images/8_Ola_Otog_Offbeat_Identity.webp 2250w" alt="" src="images/8_Ola_Otog_Offbeat_Identity.jpg" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/1_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/1_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/1_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/1_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/2_Ola_Otog_Offbeat_Identity.webp 720w" alt="" src="images/2_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/3_Ola_Otog_Offbeat_Identity.webp 650w" alt="" src="images/3_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/4_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/4_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/4_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/4_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/4_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/5_Ola_Otog_Offbeat_Identity.webp 650w" alt="" src="images/5_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/6_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/6_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/6_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/6_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/6_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/7_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/7_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/7_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/7_Ola_Otog_Offbeat_Identity.webp 1920w" alt="" src="images/7_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/8_Ola_Otog_Offbeat_Identity-p-500.webp 500w, images/8_Ola_Otog_Offbeat_Identity-p-800.webp 800w, images/8_Ola_Otog_Offbeat_Identity-p-1080.webp 1080w, images/8_Ola_Otog_Offbeat_Identity-p-1600.webp 1600w, images/8_Ola_Otog_Offbeat_Identity-p-2000.webp 2000w, images/8_Ola_Otog_Offbeat_Identity.webp 2250w" alt="" src="images/8_Ola_Otog_Offbeat_Identity.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -979,14 +1033,14 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/1_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/1_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/1_Ola_Otog_Ungeborene-_Tranen.webp 1700w" alt="" src="images/1_Ola_Otog_Ungeborene-_Tranen.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/2_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/2_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/2_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/2_Ola_Otog_Ungeborene-_Tranen-p-2000.webp 2000w, images/2_Ola_Otog_Ungeborene-_Tranen.webp 3024w" alt="" src="images/2_Ola_Otog_Ungeborene-_Tranen.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/3_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/3_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/3_Ola_Otog_Ungeborene-_Tranen.webp 1350w" alt="" src="images/3_Ola_Otog_Ungeborene-_Tranen.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/4_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/4_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/4_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/4_Ola_Otog_Ungeborene-_Tranen-p-2000.webp 2000w, images/4_Ola_Otog_Ungeborene-_Tranen.webp 2694w" alt="" src="images/4_Ola_Otog_Ungeborene-_Tranen.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/6_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/6_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/6_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/6_Ola_Otog_Ungeborene-_Tranen.webp 2126w" alt="" src="images/6_Ola_Otog_Ungeborene-_Tranen.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/7_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/7_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/7_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/7_Ola_Otog_Ungeborene-_Tranen.webp 2126w" alt="" src="images/7_Ola_Otog_Ungeborene-_Tranen.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/8_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/8_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/8_Ola_Otog_Ungeborene-_Tranen.webp 1055w" alt="" src="images/8_Ola_Otog_Ungeborene-_Tranen.png" loading="lazy">
-            <img sizes="100vw" srcset="images/9_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/9_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/9_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/9_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/9_Ola_Otog_Ungeborene-_Tranen.webp 1869w" alt="" src="images/9_Ola_Otog_Ungeborene-_Tranen.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/1_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/1_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/1_Ola_Otog_Ungeborene-_Tranen.webp 1700w" alt="" src="images/1_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/2_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/2_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/2_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/2_Ola_Otog_Ungeborene-_Tranen-p-2000.webp 2000w, images/2_Ola_Otog_Ungeborene-_Tranen.webp 3024w" alt="" src="images/2_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/3_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/3_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/3_Ola_Otog_Ungeborene-_Tranen.webp 1350w" alt="" src="images/3_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/4_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/4_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/4_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/4_Ola_Otog_Ungeborene-_Tranen-p-2000.webp 2000w, images/4_Ola_Otog_Ungeborene-_Tranen.webp 2694w" alt="" src="images/4_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/6_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/6_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/6_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/6_Ola_Otog_Ungeborene-_Tranen.webp 2126w" alt="" src="images/6_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/7_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/7_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/7_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/7_Ola_Otog_Ungeborene-_Tranen.webp 2126w" alt="" src="images/7_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/8_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/8_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/8_Ola_Otog_Ungeborene-_Tranen.webp 1055w" alt="" src="images/8_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/9_Ola_Otog_Ungeborene-_Tranen-p-500.webp 500w, images/9_Ola_Otog_Ungeborene-_Tranen-p-800.webp 800w, images/9_Ola_Otog_Ungeborene-_Tranen-p-1080.webp 1080w, images/9_Ola_Otog_Ungeborene-_Tranen-p-1600.webp 1600w, images/9_Ola_Otog_Ungeborene-_Tranen.webp 1869w" alt="" src="images/9_Ola_Otog_Ungeborene-_Tranen.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1004,13 +1058,13 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/1_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/1_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/1_Ola_Otog_Pavilion_of_Culture.webp 1800w" alt="" src="images/1_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/2_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/2_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/2_Ola_Otog_Pavilion_of_Culture.webp 1536w" alt="" src="images/2_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/3_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/3_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/3_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/3_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/3_Ola_Otog_Pavilion_of_Culture.webp 2700w" alt="" src="images/3_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/4_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/4_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/4_Ola_Otog_Pavilion_of_Culture.webp 1400w" alt="" src="images/4_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/5_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/5_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/5_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/5_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/5_Ola_Otog_Pavilion_of_Culture.webp 2700w" alt="" src="images/5_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/6_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/6_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/6_Ola_Otog_Pavilion_of_Culture.webp 1272w" alt="" src="images/6_Ola_Otog_Pavilion_of_Culture.png" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/7_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/7_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/7_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/7_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/7_Ola_Otog_Pavilion_of_Culture.webp 3208w" alt="" src="images/7_Ola_Otog_Pavilion_of_Culture.jpg" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/1_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/1_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/1_Ola_Otog_Pavilion_of_Culture.webp 1800w" alt="" src="images/1_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/2_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/2_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/2_Ola_Otog_Pavilion_of_Culture.webp 1536w" alt="" src="images/2_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/3_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/3_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/3_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/3_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/3_Ola_Otog_Pavilion_of_Culture.webp 2700w" alt="" src="images/3_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/4_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/4_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/4_Ola_Otog_Pavilion_of_Culture.webp 1400w" alt="" src="images/4_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/5_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/5_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/5_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/5_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/5_Ola_Otog_Pavilion_of_Culture.webp 2700w" alt="" src="images/5_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/6_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/6_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/6_Ola_Otog_Pavilion_of_Culture.webp 1272w" alt="" src="images/6_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_Pavilion_of_Culture-p-500.webp 500w, images/7_Ola_Otog_Pavilion_of_Culture-p-800.webp 800w, images/7_Ola_Otog_Pavilion_of_Culture-p-1080.webp 1080w, images/7_Ola_Otog_Pavilion_of_Culture-p-1600.webp 1600w, images/7_Ola_Otog_Pavilion_of_Culture-p-2000.webp 2000w, images/7_Ola_Otog_Pavilion_of_Culture.webp 3208w" alt="" src="images/7_Ola_Otog_Pavilion_of_Culture.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1028,10 +1082,10 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Shared_reality-p-500.webp 500w, images/1_Ola_Otog_Shared_reality-p-800.webp 800w, images/1_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/1_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/1_Ola_Otog_Shared_reality.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Shared_reality-p-500.webp 500w, images/2_Ola_Otog_Shared_reality-p-800.webp 800w, images/2_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/2_Ola_Otog_Shared_reality.webp 1250w" alt="" src="images/2_Ola_Otog_Shared_reality.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Shared_reality-p-500.webp 500w, images/3_Ola_Otog_Shared_reality-p-800.webp 800w, images/3_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/3_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/3_Ola_Otog_Shared_reality.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Shared_reality-p-500.webp 500w, images/4_Ola_Otog_Shared_reality-p-800.webp 800w, images/4_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/4_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/4_Ola_Otog_Shared_reality.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Shared_reality-p-500.webp 500w, images/1_Ola_Otog_Shared_reality-p-800.webp 800w, images/1_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/1_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/1_Ola_Otog_Shared_reality.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Shared_reality-p-500.webp 500w, images/2_Ola_Otog_Shared_reality-p-800.webp 800w, images/2_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/2_Ola_Otog_Shared_reality.webp 1250w" alt="" src="images/2_Ola_Otog_Shared_reality.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Shared_reality-p-500.webp 500w, images/3_Ola_Otog_Shared_reality-p-800.webp 800w, images/3_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/3_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/3_Ola_Otog_Shared_reality.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Shared_reality-p-500.webp 500w, images/4_Ola_Otog_Shared_reality-p-800.webp 800w, images/4_Ola_Otog_Shared_reality-p-1080.webp 1080w, images/4_Ola_Otog_Shared_reality.webp 1800w" alt="" src="images/4_Ola_Otog_Shared_reality.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1049,14 +1103,14 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Animal_Fund-p-500.webp 500w, images/1_Ola_Otog_Animal_Fund-p-800.webp 800w, images/1_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/1_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/1_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Animal_Fund-p-500.webp 500w, images/2_Ola_Otog_Animal_Fund-p-800.webp 800w, images/2_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/2_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/2_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Animal_Fund-p-500.webp 500w, images/3_Ola_Otog_Animal_Fund-p-800.webp 800w, images/3_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/3_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/3_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Animal_Fund-p-500.webp 500w, images/4_Ola_Otog_Animal_Fund-p-800.webp 800w, images/4_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/4_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/4_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Animal_Fund-p-500.webp 500w, images/5_Ola_Otog_Animal_Fund-p-800.webp 800w, images/5_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/5_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/5_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Animal_Fund-p-500.webp 500w, images/6_Ola_Otog_Animal_Fund-p-800.webp 800w, images/6_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/6_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/6_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_Animal_Fund-p-500.webp 500w, images/7_Ola_Otog_Animal_Fund-p-800.webp 800w, images/7_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/7_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/7_Ola_Otog_Animal_Fund.png" loading="lazy">
-            <img sizes="100vw" srcset="images/469195798_8846480865444682_3328049825354129069_n-p-500.webp 500w, images/469195798_8846480865444682_3328049825354129069_n-p-800.webp 800w, images/469195798_8846480865444682_3328049825354129069_n-p-1080.webp 1080w, images/469195798_8846480865444682_3328049825354129069_n.webp 1444w" alt="" src="images/469195798_8846480865444682_3328049825354129069_n.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Animal_Fund-p-500.webp 500w, images/1_Ola_Otog_Animal_Fund-p-800.webp 800w, images/1_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/1_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/1_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Animal_Fund-p-500.webp 500w, images/2_Ola_Otog_Animal_Fund-p-800.webp 800w, images/2_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/2_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/2_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Animal_Fund-p-500.webp 500w, images/3_Ola_Otog_Animal_Fund-p-800.webp 800w, images/3_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/3_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/3_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Animal_Fund-p-500.webp 500w, images/4_Ola_Otog_Animal_Fund-p-800.webp 800w, images/4_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/4_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/4_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Animal_Fund-p-500.webp 500w, images/5_Ola_Otog_Animal_Fund-p-800.webp 800w, images/5_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/5_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/5_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Animal_Fund-p-500.webp 500w, images/6_Ola_Otog_Animal_Fund-p-800.webp 800w, images/6_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/6_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/6_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_Animal_Fund-p-500.webp 500w, images/7_Ola_Otog_Animal_Fund-p-800.webp 800w, images/7_Ola_Otog_Animal_Fund-p-1080.webp 1080w, images/7_Ola_Otog_Animal_Fund.webp 1452w" alt="" src="images/7_Ola_Otog_Animal_Fund.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/469195798_8846480865444682_3328049825354129069_n-p-500.webp 500w, images/469195798_8846480865444682_3328049825354129069_n-p-800.webp 800w, images/469195798_8846480865444682_3328049825354129069_n-p-1080.webp 1080w, images/469195798_8846480865444682_3328049825354129069_n.webp 1444w" alt="" src="images/469195798_8846480865444682_3328049825354129069_n.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1096,14 +1150,14 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/1_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/1_Ola_Otog_In-My-Garden_Tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_In-My-Garden_Tapestry.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/2_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/2_Ola_Otog_In-My-Garden_Tapestry-p-1080.webp 1080w, images/2_Ola_Otog_In-My-Garden_Tapestry.webp 1200w" alt="" src="images/2_Ola_Otog_In-My-Garden_Tapestry.JPG" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/3_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/3_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/3_Ola_Otog_In-My-Garden_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/4_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/4_Ola_Otog_In-My-Garden_Tapestry.webp 1044w" alt="" src="images/4_Ola_Otog_In-My-Garden_Tapestry.PNG" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/5_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/5_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/5_Ola_Otog_In-My-Garden_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/6_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/6_Ola_Otog_In-My-Garden_Tapestry.webp 1102w" alt="" src="images/6_Ola_Otog_In-My-Garden_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/7_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/7_Ola_Otog_In-My-Garden_Tapestry-p-1080.webp 1080w, images/7_Ola_Otog_In-My-Garden_Tapestry.webp 1208w" alt="" src="images/7_Ola_Otog_In-My-Garden_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/8_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/8_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/8_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/8_Ola_Otog_In-My-Garden_Tapestry.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/1_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/1_Ola_Otog_In-My-Garden_Tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/2_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/2_Ola_Otog_In-My-Garden_Tapestry-p-1080.webp 1080w, images/2_Ola_Otog_In-My-Garden_Tapestry.webp 1200w" alt="" src="images/2_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/3_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/3_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/3_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/4_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/4_Ola_Otog_In-My-Garden_Tapestry.webp 1044w" alt="" src="images/4_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/5_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/5_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/5_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/6_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/6_Ola_Otog_In-My-Garden_Tapestry.webp 1102w" alt="" src="images/6_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/7_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/7_Ola_Otog_In-My-Garden_Tapestry-p-1080.webp 1080w, images/7_Ola_Otog_In-My-Garden_Tapestry.webp 1208w" alt="" src="images/7_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/8_Ola_Otog_In-My-Garden_Tapestry-p-500.webp 500w, images/8_Ola_Otog_In-My-Garden_Tapestry-p-800.webp 800w, images/8_Ola_Otog_In-My-Garden_Tapestry.webp 1104w" alt="" src="images/8_Ola_Otog_In-My-Garden_Tapestry.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1121,10 +1175,10 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1350w" alt="" src="images/1_Ola_Otog_From_Point_A_To_Point_B_Merch.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1202w" alt="" src="images/2_Ola_Otog_From_Point_A_To_Point_B_Merch.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/3_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/3_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1034w" alt="" src="images/3_Ola_Otog_From_Point_A_To_Point_B_Merch.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1202w" alt="" src="images/4_Ola_Otog_From_Point_A_To_Point_B_Merch.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/1_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1350w" alt="" src="images/1_Ola_Otog_From_Point_A_To_Point_B_Merch.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/2_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1202w" alt="" src="images/2_Ola_Otog_From_Point_A_To_Point_B_Merch.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/3_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/3_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1034w" alt="" src="images/3_Ola_Otog_From_Point_A_To_Point_B_Merch.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-500.webp 500w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-800.webp 800w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch-p-1080.webp 1080w, images/4_Ola_Otog_From_Point_A_To_Point_B_Merch.webp 1202w" alt="" src="images/4_Ola_Otog_From_Point_A_To_Point_B_Merch.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1142,14 +1196,14 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1080.webp 1080w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1600.webp 1600w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 2373w" alt="" src="images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.JPG" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1080.webp 1080w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1600.webp 1600w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-2000.webp 2000w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-2600.webp 2600w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 4032w" alt="" src="images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.JPG" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/2_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/3_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/4_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1080.webp 1080w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1600.webp 1600w, images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 2373w" alt="" src="images/5_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/6_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 1024w" alt="" src="images/8_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-500.webp 500w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-800.webp 800w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1080.webp 1080w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-1600.webp 1600w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-2000.webp 2000w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry-p-2600.webp 2600w, images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp 4032w" alt="" src="images/10_Ola_Otog_Put_Ur_Ego_In_A_Box_Tapestry.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1167,11 +1221,11 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/1_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/1_Ola_Otog_Portrait_after_sound_tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_Portrait_after_sound_tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/2_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/2_Ola_Otog_Portrait_after_sound_tapestry.webp 1024w" alt="" src="images/2_Ola_Otog_Portrait_after_sound_tapestry.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/3_Ola_Otog_Portrait_after_sound_tapestry.webp 2448w" alt="" src="images/3_Ola_Otog_Portrait_after_sound_tapestry.JPG" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/4_Ola_Otog_Portrait_after_sound_tapestry.webp 2268w" alt="" src="images/4_Ola_Otog_Portrait_after_sound_tapestry.JPG" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-2000.webp 2000w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-2600.webp 2600w, images/5_Ola_Otog_Portrait_after_sound_tapestry.webp 4032w" alt="" src="images/5_Ola_Otog_Portrait_after_sound_tapestry.JPG" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/1_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/1_Ola_Otog_Portrait_after_sound_tapestry.webp 1024w" alt="" src="images/1_Ola_Otog_Portrait_after_sound_tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/2_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/2_Ola_Otog_Portrait_after_sound_tapestry.webp 1024w" alt="" src="images/2_Ola_Otog_Portrait_after_sound_tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/3_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/3_Ola_Otog_Portrait_after_sound_tapestry.webp 2448w" alt="" src="images/3_Ola_Otog_Portrait_after_sound_tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/4_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/4_Ola_Otog_Portrait_after_sound_tapestry.webp 2268w" alt="" src="images/4_Ola_Otog_Portrait_after_sound_tapestry.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Portrait_after_sound_tapestry-p-500.webp 500w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-800.webp 800w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-1080.webp 1080w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-1600.webp 1600w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-2000.webp 2000w, images/5_Ola_Otog_Portrait_after_sound_tapestry-p-2600.webp 2600w, images/5_Ola_Otog_Portrait_after_sound_tapestry.webp 4032w" alt="" src="images/5_Ola_Otog_Portrait_after_sound_tapestry.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1189,7 +1243,7 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Letterwear-p-500.webp 500w, images/1_Ola_Otog_Letterwear-p-800.webp 800w, images/1_Ola_Otog_Letterwear-p-1080.webp 1080w, images/1_Ola_Otog_Letterwear.webp 1352w" alt="" src="images/1_Ola_Otog_Letterwear.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Letterwear-p-500.webp 500w, images/1_Ola_Otog_Letterwear-p-800.webp 800w, images/1_Ola_Otog_Letterwear-p-1080.webp 1080w, images/1_Ola_Otog_Letterwear.webp 1352w" alt="" src="images/1_Ola_Otog_Letterwear.webp" loading="lazy">
             <div class="video-wrap">
               <video autoplay loop muted playsinline poster="videos/2_Ola_Otog_Letterwear-2-poster-00001.jpg">
                 <source src="videos/2_Ola_Otog_Letterwear-2-transcode.mp4" type="video/mp4">
@@ -1213,20 +1267,20 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/ola-otog-project-o-9-p-500.webp 500w, images/ola-otog-project-o-9-p-800.webp 800w, images/ola-otog-project-o-9.webp 936w" alt="" src="images/ola-otog-project-o-9.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/1_Ola_Otog_Opera_Costumes.webp 726w" alt="" src="images/1_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/2_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/2_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/2_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/2_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/2_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/2_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/2_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/3_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/3_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/3_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/3_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/3_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/3_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/3_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/4_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/4_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/4_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/4_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/4_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/4_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/4_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/4_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/5_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/5_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/5_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/5_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/5_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/5_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/5_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/5_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/ola-otog-project-o-4-p-500.webp 500w, images/ola-otog-project-o-4-p-800.webp 800w, images/ola-otog-project-o-4-p-1080.webp 1080w, images/ola-otog-project-o-4.webp 1350w" alt="" src="images/ola-otog-project-o-4.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/ola-otog-project-o-5-p-500.webp 500w, images/ola-otog-project-o-5-p-800.webp 800w, images/ola-otog-project-o-5-p-1080.webp 1080w, images/ola-otog-project-o-5.webp 1350w" alt="" src="images/ola-otog-project-o-5.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/8_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/8_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/8_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/8_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/8_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/8_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/8_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/8_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/11_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/11_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/11_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/11_Ola_Otog_Opera_Costumes.webp 1980w" alt="" src="images/11_Ola_Otog_Opera_Costumes.jpeg" loading="lazy">
-            <img sizes="100vw" srcset="images/12_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/12_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/12_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/12_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/12_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/12_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/12_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/12_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/14_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/14_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/14_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/14_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/14_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/14_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/14_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/14_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/16_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/16_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/16_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/16_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/16_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/16_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/16_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/16_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/16_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
-            <img sizes="100vw" srcset="images/9_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/9_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/9_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/9_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/9_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/9_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/9_Ola_Otog_Opera_Costumes.jpg" loading="lazy">
+            <img sizes="100vw" srcset="images/ola-otog-project-o-9-p-500.webp 500w, images/ola-otog-project-o-9-p-800.webp 800w, images/ola-otog-project-o-9.webp 936w" alt="" src="images/ola-otog-project-o-9.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/1_Ola_Otog_Opera_Costumes.webp 726w" alt="" src="images/1_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/2_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/2_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/2_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/2_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/2_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/2_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/2_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/3_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/3_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/3_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/3_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/3_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/3_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/3_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/4_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/4_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/4_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/4_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/4_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/4_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/4_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/4_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/5_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/5_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/5_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/5_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/5_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/5_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/5_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/5_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/ola-otog-project-o-4-p-500.webp 500w, images/ola-otog-project-o-4-p-800.webp 800w, images/ola-otog-project-o-4-p-1080.webp 1080w, images/ola-otog-project-o-4.webp 1350w" alt="" src="images/ola-otog-project-o-4.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/ola-otog-project-o-5-p-500.webp 500w, images/ola-otog-project-o-5-p-800.webp 800w, images/ola-otog-project-o-5-p-1080.webp 1080w, images/ola-otog-project-o-5.webp 1350w" alt="" src="images/ola-otog-project-o-5.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/8_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/8_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/8_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/8_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/8_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/8_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/8_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/8_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/11_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/11_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/11_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/11_Ola_Otog_Opera_Costumes.webp 1980w" alt="" src="images/11_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/12_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/12_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/12_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/12_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/12_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/12_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/12_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/12_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/14_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/14_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/14_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/14_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/14_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/14_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/14_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/14_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/16_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/16_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/16_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/16_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/16_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/16_Ola_Otog_Opera_Costumes-p-2600.webp 2600w, images/16_Ola_Otog_Opera_Costumes-p-3200.webp 3200w, images/16_Ola_Otog_Opera_Costumes.webp 3861w" alt="" src="images/16_Ola_Otog_Opera_Costumes.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/9_Ola_Otog_Opera_Costumes-p-500.webp 500w, images/9_Ola_Otog_Opera_Costumes-p-800.webp 800w, images/9_Ola_Otog_Opera_Costumes-p-1080.webp 1080w, images/9_Ola_Otog_Opera_Costumes-p-1600.webp 1600w, images/9_Ola_Otog_Opera_Costumes-p-2000.webp 2000w, images/9_Ola_Otog_Opera_Costumes.webp 2784w" alt="" src="images/9_Ola_Otog_Opera_Costumes.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1244,11 +1298,11 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-1080.webp 1080w, images/1_Ola_Otog_Pre-Language_Memory_Drawings.webp 1800w" alt="" src="images/1_Ola_Otog_Pre-Language_Memory_Drawings.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/2_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/2_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/2_Ola_Otog_Pre-Language_Memory_Drawings.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/3_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/3_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/3_Ola_Otog_Pre-Language_Memory_Drawings.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/4_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/4_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/4_Ola_Otog_Pre-Language_Memory_Drawings.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/5_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/5_Ola_Otog_Pre-Language_Memory_Drawings.webp 1226w" alt="" src="images/5_Ola_Otog_Pre-Language_Memory_Drawings.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/1_Ola_Otog_Pre-Language_Memory_Drawings-p-1080.webp 1080w, images/1_Ola_Otog_Pre-Language_Memory_Drawings.webp 1800w" alt="" src="images/1_Ola_Otog_Pre-Language_Memory_Drawings.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/2_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/2_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/2_Ola_Otog_Pre-Language_Memory_Drawings.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/3_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/3_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/3_Ola_Otog_Pre-Language_Memory_Drawings.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/4_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/4_Ola_Otog_Pre-Language_Memory_Drawings.webp 1272w" alt="" src="images/4_Ola_Otog_Pre-Language_Memory_Drawings.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Pre-Language_Memory_Drawings-p-500.webp 500w, images/5_Ola_Otog_Pre-Language_Memory_Drawings-p-800.webp 800w, images/5_Ola_Otog_Pre-Language_Memory_Drawings.webp 1226w" alt="" src="images/5_Ola_Otog_Pre-Language_Memory_Drawings.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1266,7 +1320,7 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Drawings-Archive-p-500.webp 500w, images/1_Ola_Otog_Drawings-Archive-p-800.webp 800w, images/1_Ola_Otog_Drawings-Archive.webp 878w" alt="" src="images/1_Ola_Otog_Drawings-Archive.jpg" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Drawings-Archive-p-500.webp 500w, images/1_Ola_Otog_Drawings-Archive-p-800.webp 800w, images/1_Ola_Otog_Drawings-Archive.webp 878w" alt="" src="images/1_Ola_Otog_Drawings-Archive.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1276,6 +1330,163 @@
     </div><!-- /tabs-content -->
   </div><!-- /page-art-practice -->
 
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- PAGE: FOOD PRACTICE                                        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div id="page-food-practice" class="page">
+    <div class="tabs-content">
+      <div class="tabs-menu sub">
+        <a href="#food-practice/wild" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="wild"><div>Gathering Around Wild Matter</div></a>
+        <a href="#food-practice/eggs" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="eggs"><div>Gathering Around Eggs</div></a>
+        <a href="#food-practice/bread" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="bread"><div>Gathering Around Bread</div></a>
+        <a href="#food-practice/offbeat" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="offbeat"><div>Roots, Shoots &amp; Leaves</div></a>
+      </div>
+      <div class="sub-tab-content">
+
+        <!-- GATHERING AROUND WILD MATTER -->
+        <div id="sub-food-practice-wild" class="sub-page">
+          <div class="sub-tab-vertical-split">
+            <div class="sub-tab-left-wrap">
+              
+              <div class="home-text-container-card project-name">
+                <div class="h3 caps">Gathering Around Wild Matter</div>
+                <div class="h3 index">Curated by Ola Otog. With maisongb, Yen-Chao Lin, and Magda Drozd.</div>
+              </div>
+              <div class="home-text-container-card">
+                <div class="h3">There is a world before the cultivated one. Before the garden was designed, before the harvest was planned, there was wild matter. Roots that pushed through stone. Plants that grew toward light without being asked. Ingredients that needed no occasion to be cherished.<br><br>One evening, we gathered around that world. The space was arranged so that wild matter was the subject, edible, elemental, intentional. Guests brought dishes that were green and wild, each one a different interpretation of the theme. The evening was accompanied by a soundscape created by sound artist Magda Drozd, drawing sound from edible and natural elements. Everything had a story. We looked for it together.</div>
+              </div>
+              <div class="home-text-container-card gathering-intro">
+                <div class="h3">Gatherings Around Food is a series I started as a way of exploring the material practice of food, how it is grown, made, and shared collectively. For each gathering, I invite an artist, designer, or food practitioner to join me for one evening, together we develop the subject, the spatial arrangement, and how the evening unfolds. The themes move between ecology, craft, organic materials, and the stories that food carries with it. Each gathering is singular, shaped entirely by who is in the room and what we are gathered around, a reimagining of what a supper club can be.</div>
+              </div>
+            </div>
+            <div class="sub-tab-right-wrap">
+            </div>
+          </div>
+        </div>
+
+        <!-- GATHERING AROUND EGGS -->
+        <div id="sub-food-practice-eggs" class="sub-page">
+          <div class="sub-tab-vertical-split">
+            <div class="sub-tab-left-wrap">
+              
+              <div class="home-text-container-card project-name">
+                <div class="h3 caps">Gathering Around Eggs</div>
+                <div class="h3 index">Curated by Ola Otog. With Yen-Chao Lin and Liang-Jung Chen.</div>
+              </div>
+              <div class="home-text-container-card">
+                <div class="h3">An egg is both food and form. A structure to eat and to think through, to hold and to make with. Held at Bow Quarter's studio in East London, we spent an evening with the egg as material and as food, working with eggshells through waxing, inlay, carving, and balancing. Guests brought dishes where the egg was ingredient, shape, or concept. Making and eating unfolded as one continuous gesture.</div>
+              </div>
+              <div class="home-text-container-card gathering-intro">
+                <div class="h3">Gatherings Around Food is a series I started as a way of exploring the material practice of food, how it is grown, made, and shared collectively. For each gathering, I invite an artist, designer, or food practitioner to join me for one evening, together we develop the subject, the spatial arrangement, and how the evening unfolds. The themes move between ecology, craft, organic materials, and the stories that food carries with it. Each gathering is singular, shaped entirely by who is in the room and what we are gathered around, a reimagining of what a supper club can be.</div>
+              </div>
+            </div>
+            <div class="sub-tab-right-wrap">
+              <img src="images/0_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/1_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/2_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/3_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/4_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/5_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/6_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/7_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/8_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/9_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/10_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/11_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/12_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/13_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/14_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/15_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/16_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/17_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/18_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+              <img src="images/19_Gathering_Around_Eggs_Ola_Otog_LiangJung_Chen_Yen-Chao_Lin Large.webp" alt="" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- GATHERING AROUND BREAD -->
+        <div id="sub-food-practice-bread" class="sub-page">
+          <div class="sub-tab-vertical-split">
+            <div class="sub-tab-left-wrap">
+              
+              <div class="home-text-container-card project-name">
+                <div class="h3 caps">Gathering Around Bread</div>
+                <div class="h3 index">Curated by Ola Otog. With Liang-Jung Chen.</div>
+              </div>
+              <div class="home-text-container-card">
+                <div class="h3">Bread is one of the oldest shared things. It crosses cultures, climates, and kitchens, carried in memory as much as in recipe. Held in an artist's studio in a former fire station in East London, each participant brought a bread that held meaning to them, any shape, any ingredient, any origin. Over twenty breads on the night, each one different. Everything sat together, held by an artist's edible installation running through it. We tasted, and we talked about what each bread carried, how something so ordinary can hold so much.</div>
+              </div>
+              <div class="home-text-container-card gathering-intro">
+                <div class="h3">Gatherings Around Food is a series I started as a way of exploring the material practice of food, how it is grown, made, and shared collectively. For each gathering, I invite an artist, designer, or food practitioner to join me for one evening, together we develop the subject, the spatial arrangement, and how the evening unfolds. The themes move between ecology, craft, organic materials, and the stories that food carries with it. Each gathering is singular, shaped entirely by who is in the room and what we are gathered around, a reimagining of what a supper club can be.</div>
+              </div>
+            </div>
+            <div class="sub-tab-right-wrap">
+              <img src="images/1_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/2_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/3_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/4_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/5_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/6_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/7_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/8_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/9_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/10_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/11_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/12_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/13_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/14_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/15_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/16_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/17_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+              <img src="images/18_Ola_Otog_Bread Large.webp" alt="" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- OFFBEAT x PARLOUR -->
+        <div id="sub-food-practice-offbeat" class="sub-page">
+          <div class="sub-tab-vertical-split">
+            <div class="sub-tab-left-wrap">
+              <div class="home-text-container-card project-name">
+                <div class="h3 caps">Roots, Shoots &amp; Leaves</div>
+                <div class="h3 index">Curated by Ola Otog. With chef Jesse Dunford Wood and OffBeat Folk Film Festival.</div>
+              </div>
+              <div class="home-text-container-card">
+                <div class="h3">British summer has a particular generosity to it, abundant, and quietly eccentric. This evening was built around that.<br><br>Held at Parlour in Kensal Rise, the supper club brought together modern British cooking, folk film, and the abundance of the season. I curated the menu together with chef Jesse Dunford Wood, sea buckthorn slushy, cherry tomatoes on a stick, soda bread shaped and made at the table, rhubarb jammy dodgers, white chocolate gooseberries. For the evening, I made everything in the space by hand, tablecloths and napkins sewn, menu cards designed and printed, tables carefully dressed, and dill pickle popcorn maypoles constructed as edible sculptures at the centre of it all. Films from the OffBeat Folk Film Festival archive played through the evening, selected by Mike Hankin.<br><br>The first supper club for OffBeat Folk Film Festival, over forty guests, and an evening that felt, for a few hours, like its own world.</div>
+              </div>
+            </div>
+            <div class="sub-tab-right-wrap">
+              <img src="images/0_Ola_Otog_Roots Large Large.webp" alt="" loading="lazy">
+              <img src="images/1_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/2_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/3_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/4_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/5_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/6_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/7_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/8_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/9_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/10_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/11_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/12_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/13_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/14_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/15_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/16_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/17_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/18_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/19_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+              <img src="images/20_Ola_Otog_Roots Large.webp" alt="" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /page-food-practice -->
 
   <!-- ══════════════════════════════════════════════════════════ -->
   <!-- PAGE: FIELD NOTES                                          -->
@@ -1302,13 +1513,13 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_RDI_2024-p-500.webp 500w, images/2_Ola_Otog_RDI_2024-p-800.webp 800w, images/2_Ola_Otog_RDI_2024.webp 1108w" alt="" src="images/2_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_RDI_2024-p-500.webp 500w, images/1_Ola_Otog_RDI_2024-p-800.webp 800w, images/1_Ola_Otog_RDI_2024.webp 1062w" alt="" src="images/1_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_RDI_2024-p-500.webp 500w, images/3_Ola_Otog_RDI_2024-p-800.webp 800w, images/3_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/3_Ola_Otog_RDI_2024.webp 1590w" alt="" src="images/3_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_RDI_2024-p-500.webp 500w, images/4_Ola_Otog_RDI_2024-p-800.webp 800w, images/4_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/4_Ola_Otog_RDI_2024.webp 1557w" alt="" src="images/4_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_RDI_2024-p-500.webp 500w, images/5_Ola_Otog_RDI_2024-p-800.webp 800w, images/5_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/5_Ola_Otog_RDI_2024.webp 1178w" alt="" src="images/5_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_RDI_2024-p-500.webp 500w, images/6_Ola_Otog_RDI_2024-p-800.webp 800w, images/6_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/6_Ola_Otog_RDI_2024.webp 1569w" alt="" src="images/6_Ola_Otog_RDI_2024.png" loading="lazy">
-            <img sizes="100vw" srcset="images/7_Ola_Otog_RDI_2024-p-500.webp 500w, images/7_Ola_Otog_RDI_2024-p-800.webp 800w, images/7_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/7_Ola_Otog_RDI_2024.webp 1715w" alt="" src="images/7_Ola_Otog_RDI_2024.png" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_RDI_2024-p-500.webp 500w, images/2_Ola_Otog_RDI_2024-p-800.webp 800w, images/2_Ola_Otog_RDI_2024.webp 1108w" alt="" src="images/2_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_RDI_2024-p-500.webp 500w, images/1_Ola_Otog_RDI_2024-p-800.webp 800w, images/1_Ola_Otog_RDI_2024.webp 1062w" alt="" src="images/1_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_RDI_2024-p-500.webp 500w, images/3_Ola_Otog_RDI_2024-p-800.webp 800w, images/3_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/3_Ola_Otog_RDI_2024.webp 1590w" alt="" src="images/3_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_RDI_2024-p-500.webp 500w, images/4_Ola_Otog_RDI_2024-p-800.webp 800w, images/4_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/4_Ola_Otog_RDI_2024.webp 1557w" alt="" src="images/4_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_RDI_2024-p-500.webp 500w, images/5_Ola_Otog_RDI_2024-p-800.webp 800w, images/5_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/5_Ola_Otog_RDI_2024.webp 1178w" alt="" src="images/5_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_RDI_2024-p-500.webp 500w, images/6_Ola_Otog_RDI_2024-p-800.webp 800w, images/6_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/6_Ola_Otog_RDI_2024.webp 1569w" alt="" src="images/6_Ola_Otog_RDI_2024.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/7_Ola_Otog_RDI_2024-p-500.webp 500w, images/7_Ola_Otog_RDI_2024-p-800.webp 800w, images/7_Ola_Otog_RDI_2024-p-1080.webp 1080w, images/7_Ola_Otog_RDI_2024.webp 1715w" alt="" src="images/7_Ola_Otog_RDI_2024.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1326,11 +1537,11 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Archeology_of_Place-p-500.webp 500w, images/1_Ola_Otog_Archeology_of_Place-p-800.webp 800w, images/1_Ola_Otog_Archeology_of_Place-p-1080.webp 1080w, images/1_Ola_Otog_Archeology_of_Place.webp 1440w" alt="" src="images/1_Ola_Otog_Archeology_of_Place.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/2_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/2_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/2_Ola_Otog_Archeology_of_Place.webp.webp 1440w" alt="" src="images/2_Ola_Otog_Archeology_of_Place.png.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/3_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/3_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/3_Ola_Otog_Archeology_of_Place.webp.webp 1667w" alt="" src="images/3_Ola_Otog_Archeology_of_Place.png.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/4_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/4_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/4_Ola_Otog_Archeology_of_Place.webp.webp 1350w" alt="" src="images/4_Ola_Otog_Archeology_of_Place.png.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/5_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/5_Ola_Otog_Archeology_of_Place.webp.webp 937w" alt="" src="images/5_Ola_Otog_Archeology_of_Place.png.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Archeology_of_Place-p-500.webp 500w, images/1_Ola_Otog_Archeology_of_Place-p-800.webp 800w, images/1_Ola_Otog_Archeology_of_Place-p-1080.webp 1080w, images/1_Ola_Otog_Archeology_of_Place.webp 1440w" alt="" src="images/1_Ola_Otog_Archeology_of_Place.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/2_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/2_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/2_Ola_Otog_Archeology_of_Place.webp.webp 1440w" alt="" src="images/2_Ola_Otog_Archeology_of_Place.png.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/3_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/3_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/3_Ola_Otog_Archeology_of_Place.webp.webp 1667w" alt="" src="images/3_Ola_Otog_Archeology_of_Place.png.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/4_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/4_Ola_Otog_Archeology_of_Place.webp-p-1080.webp 1080w, images/4_Ola_Otog_Archeology_of_Place.webp.webp 1350w" alt="" src="images/4_Ola_Otog_Archeology_of_Place.png.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Archeology_of_Place.webp-p-500.webp 500w, images/5_Ola_Otog_Archeology_of_Place.webp-p-800.webp 800w, images/5_Ola_Otog_Archeology_of_Place.webp.webp 937w" alt="" src="images/5_Ola_Otog_Archeology_of_Place.png.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1348,7 +1559,7 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Movement-p-500.webp 500w, images/1_Ola_Otog_Movement-p-800.webp 800w, images/1_Ola_Otog_Movement-p-1080.webp 1080w, images/1_Ola_Otog_Movement.webp 1153w" alt="" src="images/1_Ola_Otog_Movement.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Movement-p-500.webp 500w, images/1_Ola_Otog_Movement-p-800.webp 800w, images/1_Ola_Otog_Movement-p-1080.webp 1080w, images/1_Ola_Otog_Movement.webp 1153w" alt="" src="images/1_Ola_Otog_Movement.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1366,12 +1577,12 @@
             </div>
           </div>
           <div class="sub-tab-right-wrap">
-            <img sizes="100vw" srcset="images/1_Ola_Otog_Stillness-p-500.webp 500w, images/1_Ola_Otog_Stillness-p-800.webp 800w, images/1_Ola_Otog_Stillness.webp 1024w" alt="" src="images/1_Ola_Otog_Stillness.png" loading="lazy">
-            <img sizes="100vw" srcset="images/2_Ola_Otog_Stillness-p-500.webp 500w, images/2_Ola_Otog_Stillness-p-800.webp 800w, images/2_Ola_Otog_Stillness-p-1080.webp 1080w, images/2_Ola_Otog_Stillness.webp 1500w" alt="" src="images/2_Ola_Otog_Stillness.png" loading="lazy">
-            <img sizes="100vw" srcset="images/3_Ola_Otog_Stillness-p-500.webp 500w, images/3_Ola_Otog_Stillness-p-800.webp 800w, images/3_Ola_Otog_Stillness-p-1080.webp 1080w, images/3_Ola_Otog_Stillness.webp 1234w" alt="" src="images/3_Ola_Otog_Stillness.png" loading="lazy">
-            <img sizes="100vw" srcset="images/4_Ola_Otog_Stillness-p-500.webp 500w, images/4_Ola_Otog_Stillness-p-800.webp 800w, images/4_Ola_Otog_Stillness-p-1080.webp 1080w, images/4_Ola_Otog_Stillness.webp 1701w" alt="" src="images/4_Ola_Otog_Stillness.png" loading="lazy">
-            <img sizes="100vw" srcset="images/5_Ola_Otog_Stillness-p-500.webp 500w, images/5_Ola_Otog_Stillness-p-800.webp 800w, images/5_Ola_Otog_Stillness-p-1080.webp 1080w, images/5_Ola_Otog_Stillness.webp 1500w" alt="" src="images/5_Ola_Otog_Stillness.png" loading="lazy">
-            <img sizes="100vw" srcset="images/6_Ola_Otog_Stillness-p-500.webp 500w, images/6_Ola_Otog_Stillness-p-800.webp 800w, images/6_Ola_Otog_Stillness-p-1080.webp 1080w, images/6_Ola_Otog_Stillness.webp 1500w" alt="" src="images/6_Ola_Otog_Stillness.png" loading="lazy">
+            <img sizes="100vw" srcset="images/1_Ola_Otog_Stillness-p-500.webp 500w, images/1_Ola_Otog_Stillness-p-800.webp 800w, images/1_Ola_Otog_Stillness.webp 1024w" alt="" src="images/1_Ola_Otog_Stillness.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/2_Ola_Otog_Stillness-p-500.webp 500w, images/2_Ola_Otog_Stillness-p-800.webp 800w, images/2_Ola_Otog_Stillness-p-1080.webp 1080w, images/2_Ola_Otog_Stillness.webp 1500w" alt="" src="images/2_Ola_Otog_Stillness.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/3_Ola_Otog_Stillness-p-500.webp 500w, images/3_Ola_Otog_Stillness-p-800.webp 800w, images/3_Ola_Otog_Stillness-p-1080.webp 1080w, images/3_Ola_Otog_Stillness.webp 1234w" alt="" src="images/3_Ola_Otog_Stillness.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/4_Ola_Otog_Stillness-p-500.webp 500w, images/4_Ola_Otog_Stillness-p-800.webp 800w, images/4_Ola_Otog_Stillness-p-1080.webp 1080w, images/4_Ola_Otog_Stillness.webp 1701w" alt="" src="images/4_Ola_Otog_Stillness.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/5_Ola_Otog_Stillness-p-500.webp 500w, images/5_Ola_Otog_Stillness-p-800.webp 800w, images/5_Ola_Otog_Stillness-p-1080.webp 1080w, images/5_Ola_Otog_Stillness.webp 1500w" alt="" src="images/5_Ola_Otog_Stillness.webp" loading="lazy">
+            <img sizes="100vw" srcset="images/6_Ola_Otog_Stillness-p-500.webp 500w, images/6_Ola_Otog_Stillness-p-800.webp 800w, images/6_Ola_Otog_Stillness-p-1080.webp 1080w, images/6_Ola_Otog_Stillness.webp 1500w" alt="" src="images/6_Ola_Otog_Stillness.webp" loading="lazy">
           </div>
         </div>
       </div>
@@ -1438,6 +1649,14 @@
     var navLink = document.querySelector('.nav-link-button[data-page="' + pageId + '"]');
     if (navLink) navLink.classList.add('active');
 
+    // preload all images in this page in the background
+    setTimeout(function() {
+      pageEl.querySelectorAll('img[loading="lazy"]').forEach(function(img) {
+        img.loading = 'eager';
+        if (img.dataset.src) img.src = img.dataset.src;
+      });
+    }, 100);
+
     // handle sub-pages
     var allSubPages = pageEl.querySelectorAll('.sub-page');
     var allSubLinks = pageEl.querySelectorAll('.sub-nav-link');
@@ -1459,6 +1678,27 @@
     // reset scroll on content column
     var content = pageEl.querySelector('.sub-tab-content, .home-navbar-container');
     if (content) content.scrollTop = 0;
+
+    // show loader while images fetch
+    var loader = document.getElementById('page-loader');
+    var images = pageEl.querySelectorAll('img[loading="lazy"]');
+    var unloaded = Array.from(images).filter(function(img) { return !img.complete; });
+    if (unloaded.length > 0) {
+      loader.classList.add('visible');
+      var loaded = 0;
+      unloaded.forEach(function(img) {
+        img.addEventListener('load', function() {
+          loaded++;
+          if (loaded >= unloaded.length) loader.classList.remove('visible');
+        });
+        img.addEventListener('error', function() {
+          loaded++;
+          if (loaded >= unloaded.length) loader.classList.remove('visible');
+        });
+      });
+      // fallback — hide after 4s regardless
+      setTimeout(function() { loader.classList.remove('visible'); }, 4000);
+    }
   }
 
   // intercept all internal nav clicks to avoid page reload
@@ -1479,7 +1719,7 @@
   // initial load
   route(window.location.hash || '#' + DEFAULT_HASH);
 
-  // logo click — scroll active content column to top
+  // logo click, scroll active content column to top
   document.getElementById('logo-wrap').addEventListener('click', function() {
     var activePage = document.querySelector('.page.active');
     if (!activePage) return;
