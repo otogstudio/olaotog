@@ -491,6 +491,22 @@
       font-style: normal;
       color: #000;
     }
+
+    /* Instagram link on contact page: always red, no underline */
+    .contact-link,
+    .contact-link:link,
+    .contact-link:visited,
+    .contact-link:active {
+      color: brown;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .contact-link:hover {
+      color: brown;
+      font-style: italic;
+      text-decoration: none;
+    }
     
     /* ── Pages ────────────────────────────────────────────────────── */
     
@@ -876,6 +892,8 @@
         <div class="home-text-container-card">
           <div class="h3">PARTICIPATIONS</div>
           <div class="participations-wrap">
+            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Edible installation at Tornado Gallery, <em>Long Live Progress</em>, Temse, Belgium</div></div></div>
+            <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Participatory installation at LAS, The Altar Festival, London, UK</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Installation at Royal Academy of Arts, Drop-in and Draw, curated by Folk Club, London, UK</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Installation at Lammas Harvest Festival, Glengall Wharf Garden, London, UK</div></div></div>
             <div class="participation-entry"><div class="entry-date"><div class="h3">2026</div></div><div class="entry-info"><div class="h3">Hackney Bloom Textile Exhibition, London, UK</div></div></div>
@@ -1343,6 +1361,7 @@
   <div id="page-food-practice" class="page">
     <div class="tabs-content">
       <div class="tabs-menu sub">
+        <a href="#food-practice/cut" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="cut"><div>Looking at the Cut</div></a>
         <a href="#food-practice/wild" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="wild"><div>Gathering Around Wild Matter</div></a>
         <a href="#food-practice/eggs" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="eggs"><div>Gathering Around Eggs</div></a>
         <a href="#food-practice/bread" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="bread"><div>Gathering Around Bread</div></a>
@@ -1351,6 +1370,34 @@
         <a href="#food-practice/offbeat" class="nav-link-button sub-nav-link" data-parent="food-practice" data-sub="offbeat"><div>Roots, Shoots &amp; Leaves</div></a>
       </div>
       <div class="sub-tab-content">
+
+        <!-- LOOKING AT THE CUT -->
+        <div id="sub-food-practice-cut" class="sub-page">
+          <div class="sub-tab-vertical-split">
+            <div class="sub-tab-left-wrap">
+              <div class="home-text-container-card project-name">
+                <div class="h3 caps">Looking at the Cut</div>
+                <div class="h3 index">Edible installation by Ola Otog. Long Live Progress, curated by Hans Theys. Tornado Gallery, Temse, Belgium. October 2026.</div>
+              </div>
+              <div class="home-text-container-card">
+                <div class="h3">A cut in the bark of a tree. A furrow ploughed into a field. A scar on the body. Each one records that something happened there, and it stays long after. I wanted to appreciate the cut as it is.<br><br>I took the most basic foods, eggs, potatoes, butter, bread and a few leaves, and tore, split and halved them. Then I gilded each cut with 24-carat gold.<br><br>Gold has no taste and no nutritional value. Laid on the cut, it becomes a small ceremonial gesture, one that gives the cut its own worth.<br><br>The table was set for the opening of <em>Long Live Progress</em>, a group exhibition about freedom. Guests ate from it through the afternoon, alongside four dips: beetroot, sour cherry and raspberry; quince, apricot, mastiha and goat cheese; poppy seed, kumquat and crème d’Isigny; Brussels sprouts, hazelnut, capers and wild greens.</div>
+              </div>
+            </div>
+            <div class="sub-tab-right-wrap">
+              <img src="images/cut-1 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-2 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-3 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-4 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-5 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-6 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-7 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-8 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-9 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-10 Large.jpeg" alt="" loading="lazy">
+              <img src="images/cut-11 Large.jpeg" alt="" loading="lazy">
+            </div>
+          </div>
+        </div>
 
         <!-- GATHERING AROUND WILD MATTER -->
         <div id="sub-food-practice-wild" class="sub-page">
@@ -1369,6 +1416,7 @@
               </div>
             </div>
             <div class="sub-tab-right-wrap">
+              <img src="images/matter-intro Large.jpeg" alt="" loading="lazy">
               <img src="images/wild-mater-1 Large.jpeg" alt="" loading="lazy">
               <img src="images/wild-mater-2 Large.jpeg" alt="" loading="lazy">
               <img src="images/wild-mater-3 Large.jpeg" alt="" loading="lazy">
@@ -1698,7 +1746,7 @@
     <div class="tabs-content">
       <div class="tabs-menu sub">
         <div class="nav-link-button passive">
-          <div>For project enquiries or commissions:<br>ola.otog@gmail.com<br>LONDON, UK</div>
+          <div>For project enquiries or commissions:<br>ola.otog@gmail.com<br>LONDON, UK<br><a href="https://www.instagram.com/olaotog/" class="contact-link" target="_blank" rel="noopener">Instagram</a></div>
         </div>
       </div>
     </div><!-- /tabs-content -->
